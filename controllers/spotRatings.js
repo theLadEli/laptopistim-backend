@@ -47,6 +47,8 @@ export default async function spotRatings(req,res){
             }).returning('id')
         }
 
+        res.status(200).json({ message: 'Ratings have been recorded successfully' });
+
     } catch(error) {
         console.error("Error leaving spot ratings:", error.message);
         res.status(401).json({ message: error.message });

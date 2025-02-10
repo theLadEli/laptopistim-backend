@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
 import spotRoutes from './routes/spotRoutes.js';
 import cityRoutes from './routes/cityRoutes.js';
