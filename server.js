@@ -15,10 +15,15 @@ app.use(cors());
 // Middleware
 app.use(express.json());
 
-// // Route: auth
+// Route: test
+app.use('test', (req, res) => {
+    res.send('Server online and receiving!');
+})
+
+// Route: auth
 app.use('/auth', authRoutes);
 
-// // Route: account
+// Route: account
 app.use('/account', account);
 
 // Route: spots
