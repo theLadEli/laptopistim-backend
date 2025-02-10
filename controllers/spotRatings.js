@@ -1,24 +1,19 @@
 import db from '../config/database.js';
 
 export default async function spotRatings(req,res){
-    console.log('Backend route called');
     const { userId, id, wifiRating, powerSocketRating, occupancyRating, openLateRating } = req.body;
 
     try {
-        console.log('Trying to append ratings to spot:', id);
         if (wifiRating != '') {
-            // const [wifiFeedbackId] = 
-            console.log(await db('feedback').insert({
+            await db('feedback').insert({
                 value: wifiRating,
                 type: 1,
                 spot: id,
                 created_by: userId
-            }).returning('id'))
-            console.log('Inserted wifi rating');
+            }).returning('id')
         }
 
         if (powerSocketRating != '') {
-            // const [powersocketFeedbackId] = 
             await db('feedback').insert({
                 value: powerSocketRating,
                 type: 3,
@@ -27,8 +22,7 @@ export default async function spotRatings(req,res){
             }).returning('id')
         }
 
-        if (occupancyRating != '') {
-            // const [occupancyFeedbackId] = 
+        if (occupancyRating != '') { 
             await db('feedback').insert({
                 value: occupancyRating,
                 type: 2,
@@ -38,7 +32,6 @@ export default async function spotRatings(req,res){
         }
 
         if (openLateRating != '') {
-            // const [openlateFeedbackId] = 
             await db('feedback').insert({
                 value: openLateRating,
                 type: 4,
