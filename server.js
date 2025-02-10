@@ -15,11 +15,6 @@ app.use(cors());
 // Middleware
 app.use(express.json());
 
-// Route: test
-app.use('test', (req, res) => {
-    res.send('Server online and receiving!');
-})
-
 // Route: auth
 app.use('/auth', authRoutes);
 
@@ -36,3 +31,8 @@ app.use('/cities', cityRoutes);
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+
+// Route: test
+app.use('/', (req, res) => {
+    res.send('✅ Server online and running.\nIf you have any questions please contact eli@echocreations.co.uk.');
+})
