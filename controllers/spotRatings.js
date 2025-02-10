@@ -5,15 +5,15 @@ export default async function spotRatings(req,res){
     const { userId, id, wifiRating, powerSocketRating, occupancyRating, openLateRating } = req.body;
 
     try {
-        console.log('Truing to append ratings to spot:', id);
+        console.log('Trying to append ratings to spot:', id);
         if (wifiRating != '') {
             // const [wifiFeedbackId] = 
-            await db('feedback').insert({
+            console.log(await db('feedback').insert({
                 value: wifiRating,
                 type: 1,
                 spot: id,
                 created_by: userId
-            }).returning('id')
+            }).returning('id'))
             console.log('Inserted wifi rating');
         }
 
@@ -46,8 +46,6 @@ export default async function spotRatings(req,res){
                 created_by: userId
             }).returning('id')
         }
-
-        // res.json({ })
 
     } catch(error) {
         console.error("Error leaving spot ratings:", error.message);
