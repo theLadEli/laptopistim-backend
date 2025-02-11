@@ -9,24 +9,29 @@ const router = express.Router();
 
 router.get('/all', async (req, res) => {
     const sortBy = req.query.sortby;
-    const filters = [];
+    const filters = {
+        sortBy: sortBy,
+        wifi: false,
+        wifiCommunityRated: false,
+        openLate: false,
+        powerSockets: false
+    };
 
     if (req.query.wifi) {
-        filters.push('wifi');
+        filters.wifi = true;
     }
-    if (req.query.wifiCommunityRated) {
-        filters.push(req.query.wifiCommunityRated)
+    if (req.query.wificommunityrated) {
+        filters.wifiCommunityRated = req.query.wificommunityrated;
     }
-    if (req.query.openLate) {
-        filters.push(req.query.openLate)
+    if (req.query.openlate) {
+        filters.openLate = true;
     }
-    if (req.query.powerSockets) {
-        filters.push(req.query.powerSockets)
+    if (req.query.powersockets) {
+        filters.powerSockets = true;
     }
 
     try {
-        console.log(filters)
-        const spots = await getAllSpots(sortBy, filters);
+        const spots = await getAllSpots(filters);
         res.json(spots);
     } catch (error) {
         res.status(500).json({ error: 'Error fetching all spots' });
