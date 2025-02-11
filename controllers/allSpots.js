@@ -1,7 +1,7 @@
 import db from '../config/database.js';
 
 export async function getAllSpots(sortBy) {
-    return await db('spots')
+    let query = db('spots')
         .select(
             'spots.*', // Get all fields from spots
             db.raw('AVG(CASE WHEN feedback_type.label = ? THEN feedback.value END) as avg_wifi_rating', ['WiFi']),
@@ -13,5 +13,14 @@ export async function getAllSpots(sortBy) {
         .leftJoin('feedback', 'spots.id', 'feedback.spot')  // Join with feedback table
         .leftJoin('feedback_type', 'feedback.type', 'feedback_type.id')  // Join with feedback_type
         .groupBy('spots.id')  // Group by spot ID
-        .orderBy('spots.created_at', 'desc');  // Show newest spots first
+
+        if (sortBy == 'default'){
+            query = query.orderBy('spots.created_at', 'desc');
+        } else if (sortBy == 'newest-oldest') {
+            query = query.orderBy('spots.created_at', 'desc');
+        } else if (sortBy == 'oldest-newest') {
+            query = query.orderBy('spots.created_at', 'asc');
+        }
+
+        return await query;
 }

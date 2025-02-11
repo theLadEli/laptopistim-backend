@@ -12,7 +12,7 @@ router.get('/all', async (req, res) => {
     console.log('All sort by req param: ', sortBy);
 
     try {
-        const spots = await getAllSpots();
+        const spots = await getAllSpots(sortBy);
         res.json(spots);
     } catch (error) {
         res.status(500).json({ error: 'Error fetching all spots' });
