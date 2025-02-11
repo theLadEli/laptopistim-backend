@@ -1,6 +1,6 @@
 import db from '../config/database.js';
 
-export async function getAllSpots() {
+export async function getAllSpots(sortBy) {
     return await db('spots')
         .select(
             'spots.*', // Get all fields from spots

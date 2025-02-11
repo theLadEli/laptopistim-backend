@@ -8,6 +8,9 @@ import spotRatings from '../controllers/spotRatings.js'
 const router = express.Router();
 
 router.get('/all', async (req, res) => {
+    const sortBy = req.query.sortby;
+    console.log('All sort by req param: ', sortBy);
+
     try {
         const spots = await getAllSpots();
         res.json(spots);
