@@ -1,6 +1,7 @@
 import db from '../config/database.js';
 
-export async function getAllSpots(sortBy) {
+export async function getAllSpots(sortBy, filters) {
+    console.log('get all spots req received, filters: ', filters)
     let query = db('spots')
         .select(
             'spots.*', // Get all fields from spots
