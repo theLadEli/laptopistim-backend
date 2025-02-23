@@ -2,6 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
+// Security
+const helmet = require('helmet');
+
 import spotRoutes from './routes/spotRoutes.js';
 import cityRoutes from './routes/cityRoutes.js';
 import authRoutes from './routes/authRoutes.js';
@@ -15,6 +18,18 @@ app.use(cors());
 
 // Middleware
 app.use(express.json());
+
+// Security
+app.use(helmet());
+
+const rateLimit = require('express-rate-limit');
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+});
+
+app.use(limiter);
 
 // Route: auth
 app.use('/auth', authRoutes);
