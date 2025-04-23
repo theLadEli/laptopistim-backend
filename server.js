@@ -15,7 +15,15 @@ const app = express();
 const PORT = 5200;
 
 // Allow requests from your frontend
-app.use(cors());
+const allowedOrigins = [
+  'http://localhost:5172',
+  'http://localhost:5173',
+  'https://laptopistim.vercel.app',
+  'https://laptopistim.com',
+];
+app.use(cors({
+  origin: allowedOrigins
+}));
 
 // Middleware
 app.use(express.json());
