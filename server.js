@@ -16,6 +16,7 @@ const PORT = 5200;
 
 // Allow requests from your frontend
 const allowedOrigins = [
+  'http://localhost:3000',
   'http://localhost:5172',
   'http://localhost:5173',
   'https://laptopistim.vercel.app',
